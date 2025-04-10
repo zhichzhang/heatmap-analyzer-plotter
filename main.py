@@ -3,11 +3,9 @@ from datetime import datetime
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from contourpy.typecheck import check_point_array
 from matplotlib import image as mpimg
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 import math
-import openpyxl
 
 level_width = 380
 level_height = 44
@@ -97,12 +95,6 @@ def all_sessions_mode():
     df = pd.read_excel(EXCEL_PATH)
     df.columns = df.columns.str.strip()
     level_data = df[df['Level'] == level]
-    # if level_data.empty:
-    #     print(f"No data found for the specified level {level}. Use default values instead.")
-    #     return
-    # else:
-    #     print(f"Data for the specified level {level} has been found. Generating time-cost heatmap...")
-
     grouped_data = level_data.groupby('Session ID')
     final_data = pd.DataFrame()
 
@@ -144,9 +136,7 @@ def draw(title, table):
 
     background_img = mpimg.imread('assets/level-0.png')
 
-    plt.imshow(background_img, aspect='auto',
-               extent=[0, len(normalized_df.columns), 0, len(normalized_df.index)],
-               origin='upper')
+    plt.imshow(background_img, aspect='auto', extent=[0, len(normalized_df.columns), 0, len(normalized_df.index)], origin='upper')
 
     ax = sns.heatmap(
         normalized_df,
