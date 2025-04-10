@@ -1,0 +1,26 @@
+# 虚拟环境
+.venv/
+env/
+venv/
+
+# Python 编译文件
+*.pyc
+*.pyo
+__pycache__/
+
+# IDE 或编辑器相关
+.vscode/
+.idea/
+*.iml
+
+# Python 打包文件
+*.egg-info/
+dist/
+build/
+
+# 配置文件
+*.log
+*.sqlite3
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
