@@ -122,8 +122,6 @@ def all_sessions_mode():
 
     draw(title, final_data)
 
-
-
 def draw(title, table):
     scalar = MinMaxScaler()
     normalized = scalar.fit_transform(table)
