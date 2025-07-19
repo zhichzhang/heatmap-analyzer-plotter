@@ -16,7 +16,7 @@ The tool supports three analysis modes:
 3. Aggregated data across all sessions 
 
 ### Excel Columns
-| Column                | Description (EN)                      |
+| Item               | Description                     |
 | --------------------- | ------------------------------------- |
 | `Session ID`          | Unique identifier for a game session  |
 | `Level`               | Name of the game level                |
