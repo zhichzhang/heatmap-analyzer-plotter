@@ -1,51 +1,50 @@
 # Heatmap Analyzer Plotter
 
-## Intro / 介绍
+This project is available in multiple languages:
 
-本项目用于将收集到的玩家行为数据从 Excel 文件中可视化为对应的时间消耗热力图，并叠加在关卡背景图上，绘图使用 Seaborn 和 Matplotlib 实现。 
+- [English](README.md)
+- [简体中文](README.zh-CN.md)
+
+## Intro
 
 This project visualizes collected player behavior data from Excel files into corresponding time-cost heatmaps, overlaid on level background images, using Seaborn and Matplotlib. 
 
-工具支持以下三种分析模式： 
-
 The tool supports three analysis modes:
 
-1. **Single session analysis** / 单次会话分析
-2. **Single checkpoint in a session** / 会话中单个检查点分析
-3. **Aggregated data across all sessions** / 所有关卡会话数据汇总分析
+1. Single session analysis
+2. Single checkpoint in a session
+3. Aggregated data across all sessions 
 
-### Excel Columns / Excel 字段示例
-| Column                | Description (EN)                      | 描述（中文）                     |
-| --------------------- | ------------------------------------- | -------------------------------- |
-| `Session ID`          | Unique identifier for a game session  | 会话 ID                          |
-| `Level`               | Name of the game level                | 关卡名称                         |
-| `Checkpoint`          | Name of the checkpoint                | 检查点名称                       |
-| `Heatmap JSON String` | JSON string of time data per tile     | 每个单元格的耗时数据 JSON 字符串 |
-| `Success`             | Whether the level was completed       | 是否完成整个关卡                 |
-| `Completed`           | Whether the checkpoint was completed  | 是否完成该检查点                 |
-| `Level width`         | Level width in pixels                 | 关卡宽度（px）                   |
-| `Level height`        | Level height in pixels                | 关卡高度（px）                   |
-| `Ceil size`           | Side length of each heatmap cell (px) | 热力图单元格边长（px）           |
+### Excel Columns
+| Column                | Description (EN)                      |
+| --------------------- | ------------------------------------- |
+| `Session ID`          | Unique identifier for a game session  |
+| `Level`               | Name of the game level                |
+| `Checkpoint`          | Name of the checkpoint                |
+| `Heatmap JSON String` | JSON string of time data per tile     | 
+| `Success`             | Whether the level was completed       |
+| `Completed`           | Whether the checkpoint was completed  |
+| `Level width`         | Level width in pixels                 |
+| `Level height`        | Level height in pixels                |
+| `Ceil size`           | Side length of each heatmap cell (px) |
 
-## File Structure / 文件结构
+## File Structure
 
 ```bash
 .
-├── assets/                                                    # Resource files / 资源文件夹
-│   ├── Team404 Time-cost Heatmap (Responses).xlsx             # Data source Excel file / 数据源 Excel 文件
-│   └── levels/                                                # Background images folder / 背景图文件夹
-│       └── {level}_Tilemap.png                                # Background image for each level / 每个关卡的背景图
-├── exports/                                                   # Exported heatmap images / 输出生成的热力图图像
-├── main.py                                                    # Main Python script / 主程序脚本
-├── requirements.txt                                           # Python dependencies list / Python 依赖列表
-└── .gitignore                                                 # Git ignore rules / Git 忽略文件配置
+├── assets/                                                    # Resource files 
+│   ├── Team404 Time-cost Heatmap (Responses).xlsx             # Data source Excel file 
+│   └── levels/                                                # Background images folder 
+│       └── {level}_Tilemap.png                                # Background image for each level
+├── exports/                                                   # Exported heatmap images
+├── main.py                                                    # Main Python script
+├── requirements.txt                                           # Python dependencies list
+└── .gitignore                                                 # Git ignore rules
 ```
 
-##Usage / 使用方法
+##Usage
 
-### Requirements / 环境依赖
-
-进入项目根目录后运行以下命令安装依赖：
+### Requirements
 
 Navigate to the project root directory and run the following command to install dependencies:
 
@@ -53,9 +52,7 @@ Navigate to the project root directory and run the following command to install 
 pip install -r requirements.txt
 ```
 
-### Run / 运行
-
-运行主程序：
+### Run
 
 Run the script:
 
@@ -64,35 +61,26 @@ python main.py
 ```
 
 The program will guide you through the following steps:
-程序将引导你完成以下步骤：
 
-1. **Select a level** / 选择关卡
-2. **Choose a mode** / 选择分析模式
-   - `0`: Single session mode / 单次会话模式
-   - `1`: Single session + checkpoint mode / 单次会话 + 指定检查点
-   - `2`: All sessions mode / 所有会话汇总模式
-3. **Follow prompts** to select Session ID or Checkpoint / 按提示选择会话 ID 和检查点
+1. Select a level
+2. Choose a mode
+   - `0`: Single session mode
+   - `1`: Single session + checkpoint mode
+   - `2`: All sessions mode
+3. **Follow prompts** to select Session ID or Checkpoint
 4. Heatmap will be saved in the `exports/` directory
-    生成的热力图将保存至 `exports/` 目录
 
-## Output Sample / 输出示例
+## Output Sample
+- Filename example： `Time-cost Heatmap (Session ID = 1, Level = L1, ...)-2025-05-18-16-45-12.png`
+- Content：Background image overlaid with a heatmap where darker colors indicate higher time cost
 
-- **Filename example** / 文件名示例： `Time-cost Heatmap (Session ID = 1, Level = L1, ...)-2025-05-18-16-45-12.png`
+  ![exmaple](https://github.com/zhichzhang/heatmap-analyzer-plotter/blob/main/exports/Time-cost%20Heatmap%20(All%20Sessions%2C%20Level%3DL0_tutorial_remake2)-2025-04-28-16-42-39.png)
+  
+- Features：
+  - Logarithmic scaling for time values
+  - Zero-value masking 
+  - Optional hotspot annotations
 
-- **Content** / 内容：
-
-  Background image overlaid with a heatmap where darker colors indicate higher time cost
-
-  热力图叠加在关卡背景图上，颜色深浅表示耗时高低
-
-- **Features** / 特性：
-
-  - Logarithmic scaling for time values / 时间值对数缩放
-  - Zero-value masking / 零值遮罩
-  - Optional hotspot annotations / 支持热区注释
-
-## Contact / 联系方式
-
-欢迎根据需要修改或扩展本项目。如有疑问请提交 Issue 或联系作者。 
+## Contact
 
 Feel free to modify or extend this project for your own analysis needs.  For questions, open an issue or contact the author. 
