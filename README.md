@@ -7,7 +7,7 @@ This project is available in multiple languages:
 
 ## Intro
 
-This project visualizes collected player behavior data from Excel files into corresponding time-cost heatmaps, overlaid on level background images, using Seaborn and Matplotlib. 
+This project visualizes player behavior data—collected from our team-developed game [BroCapsule](https://github.com/CSCI-526/main-team404)—by converting Excel files into time-cost heatmaps overlaid on level background images, using Seaborn and Matplotlib.
 
 The tool supports three analysis modes:
 
@@ -42,7 +42,7 @@ The tool supports three analysis modes:
 └── .gitignore                                                 # Git ignore rules
 ```
 
-##Usage
+## Usage
 
 ### Requirements
 
